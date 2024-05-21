@@ -1,3 +1,6 @@
+-- vim.g.loaded_ntrw = 1
+-- vim.g.loaded_netrwPlugin = 1
+
 --[[
 
 =====================================================================
@@ -87,11 +90,14 @@ P.S. You can delete this when you're done too. It's your config now! :)
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
+vim.g.mapleader = ','
+vim.g.maplocalleader = ','
+vim.o.termguicolors = true
+-- set encoding to utf-8
+vim.o.encoding = 'utf-8'
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 
 -- [[ Setting options ]]
 -- See `:help vim.opt`
@@ -102,7 +108,7 @@ vim.g.have_nerd_font = false
 vim.opt.number = true
 -- You can also add relative line numbers, to help with jumping.
 --  Experiment for yourself to see if you like it!
--- vim.opt.relativenumber = true
+vim.opt.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
@@ -120,16 +126,26 @@ vim.opt.breakindent = true
 
 -- Save undo history
 vim.opt.undofile = true
+vim.o.undodir = vim.fn.stdpath 'cache' .. '/undo'
+
+-- Disable swap file
+vim.o.swapfile = false
 
 -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
+-- Set gui curosr
+vim.opt.guicursor = ''
+
+-- backup to false
+vim.opt.backup = false
+
 -- Keep signcolumn on by default
 vim.opt.signcolumn = 'yes'
 
 -- Decrease update time
-vim.opt.updatetime = 250
+vim.opt.updatetime = 50
 
 -- Decrease mapped sequence wait time
 -- Displays which-key popup sooner
@@ -176,10 +192,10 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 -- TIP: Disable arrow keys in normal mode
--- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
--- vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
--- vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
--- vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
+vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
+vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
+vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
+vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
@@ -189,6 +205,26 @@ vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left wind
 vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+
+-- From primeagen
+vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv'")
+vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv'")
+vim.keymap.set('n', 'J', 'mzJ`z')
+vim.keymap.set('n', '<C-d>', '<C-d>zz')
+vim.keymap.set('n', '<C-u>', '<C-u>zz')
+vim.keymap.set('n', 'n', 'nzzzv')
+vim.keymap.set('n', 'N', 'Nzzzv')
+vim.keymap.set('n', 'Q', '<nop>')
+vim.keymap.set('n', '<C-f>', '<cmd>silent !tmux neww tmux-sessionizer<CR>')
+vim.keymap.set('n', '<leader>s', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+
+-- For tab management
+vim.keymap.set('n', '<leader>tn', ':tabnew<CR>', { desc = 'Tab new' })
+vim.keymap.set('n', '<leader>tc', ':tabclose<CR>', { desc = 'Tab close' })
+vim.keymap.set('n', '<leader>to', ':tabonly<CR>', { desc = 'Tab only' })
+vim.keymap.set('n', '<leader>tm', ':tabmove ', { desc = 'Tab move' })
+vim.keymap.set('n', '<leader>th', ':tabp<CR>', { desc = 'Tab previous' })
+vim.keymap.set('n', '<leader>tl', ':tabn<CR>', { desc = 'Tab next' })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -203,6 +239,22 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.highlight.on_yank()
   end,
 })
+
+-- Other keys
+-- Remap save shortcut to <leader>s
+vim.keymap.set('n', '<leader>w', ':w<CR>', { desc = 'Save ile' })
+
+-- Remap quit shortcut to <leader>q
+vim.keymap.set('n', '<leader>q', ':q<CR>', { desc = 'Quit file' })
+
+-- Remap quit all shortcut to <leader>Q
+vim.keymap.set('n', '<leader>Q', ':qa<CR>', { desc = 'Quit all' })
+
+-- Great map for pasting
+vim.keymap.set('x', '<leader>p', '"_dP')
+vim.keymap.set('n', '<leader>y', '"+y')
+vim.keymap.set('v', '<leader>y', '"+y')
+vim.keymap.set('n', '<leader>Y', '"+Y')
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
@@ -575,7 +627,7 @@ require('lazy').setup({
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`tsserver`) will work just fine
-        -- tsserver = {},
+        tsserver = {},
         --
 
         lua_ls = {
@@ -652,6 +704,7 @@ require('lazy').setup({
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
+        php = { 'phpcbf' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
@@ -784,7 +837,38 @@ require('lazy').setup({
       -- Load the colorscheme here.
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'tokyonight-night'
+      require('tokyonight').setup {
+        style = 'night',
+        transparent = true,
+        terminal_colors = true,
+        styles = {
+          comments = { italic = true },
+          keywords = { italic = true },
+          functions = {},
+          variables = {},
+          sidebars = 'dark',
+          floats = 'dark',
+        }, -- italic = true,
+        -- italic_comments = true,
+        sidebars = { 'qf', 'vista_kind', 'terminal', 'packer' },
+        day_brightness = 0.3, -- Adjusts the brightness of the colors of the **Day** style. Number between 0 and 1, from dull to vibrant colors
+        hide_inactive_statusline = false, -- Enabling this option, will hide inactive statuslines and replace them with a thin border instead. Should work with the standard **StatusLine** and **LuaLine**.
+        dim_inactive = false, -- dims inactive windows
+        lualine_bold = false, -- When `true`, section headers in the lualine theme will be bold
+
+        --- You can override specific color groups to use other groups or a hex color
+        --- function will be called with a ColorScheme table
+        ---@param colors ColorScheme
+        on_colors = function(colors) end,
+
+        --- You can override specific highlights to use other groups or a hex color
+        --- function will be called with a Highlights and ColorScheme table
+        ---@param highlights Highlights
+        ---@param colors ColorScheme
+        on_highlights = function(highlights, colors) end,
+      }
+
+      vim.cmd.colorscheme 'tokyonight-moon'
 
       -- You can configure highlights by doing something like:
       vim.cmd.hi 'Comment gui=none'
@@ -872,13 +956,16 @@ require('lazy').setup({
   --
   --  Here are some example plugins that I've included in the Kickstart repository.
   --  Uncomment any of the lines below to enable them (you will need to restart nvim).
-  --
-  -- require 'kickstart.plugins.debug',
-  -- require 'kickstart.plugins.indent_line',
-  -- require 'kickstart.plugins.lint',
-  -- require 'kickstart.plugins.autopairs',
-  -- require 'kickstart.plugins.neo-tree',
-  -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
+  --  Search Point: MOON
+  require 'kickstart.plugins.debug',
+  require 'kickstart.plugins.copilot-chat',
+  require 'kickstart.plugins.indent_line',
+  require 'kickstart.plugins.lint',
+  require 'kickstart.plugins.autopairs',
+  require 'kickstart.plugins.neo-tree',
+  require 'kickstart.plugins.harpoon',
+  require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
+  require 'kickstart.plugins.undotree',
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
@@ -908,5 +995,8 @@ require('lazy').setup({
   },
 })
 
+-- lets have custom .nvrmc inside our workspace folders
+vim.o.exrc = true
+vim.o.secure = true
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
