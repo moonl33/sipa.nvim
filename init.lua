@@ -13,6 +13,8 @@ vim.o.encoding = 'utf-8'
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
 
+-- recommended by auto-session plugin  https://github.com/rmagatti/auto-session
+vim.o.sessionoptions = 'blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions'
 -- [[ Setting options ]]
 -- See `:help vim.opt`
 -- NOTE: You can change these options as you wish!
@@ -546,6 +548,9 @@ require('lazy').setup({
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
+        'phpcbf', -- Used to format PHP code
+        'phpcs', -- Used to lint PHP code
+        'intelephense', -- PHP language server
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -583,7 +588,7 @@ require('lazy').setup({
         -- Disable "format_on_save lsp_fallback" for languages that don't
         -- have a well standardized coding style. You can add additional
         -- languages here or re-enable it for the disabled ones.
-        local disable_filetypes = { c = true, cpp = true }
+        local disable_filetypes = { c = true, cpp = true, php = true }
         return {
           timeout_ms = 500,
           lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
@@ -853,7 +858,8 @@ require('lazy').setup({
   -- require 'kickstart.plugins.harpoon',
   require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
   require 'kickstart.plugins.undotree',
-
+  require 'kickstart.plugins.auto-session',
+  require 'kickstart.plugins.trouble',
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
   --
