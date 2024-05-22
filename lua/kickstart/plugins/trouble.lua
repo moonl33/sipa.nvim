@@ -34,5 +34,15 @@ return {
       update_in_insert = false,
       severity_sort = false,
     }
+    vim.keymap.set('n', '<leader>xs', function()
+      vim.diagnostic.config {
+        virtual_text = true,
+      }
+    end, { desc = 'Trouble Show Diagnostics Line' }) -- Show diagnostics
+    vim.keymap.set('n', '<leader>xS', function()
+      vim.diagnostic.config {
+        virtual_text = false,
+      }
+    end, { desc = 'Trouble Hide Diagnostics Line' }) -- Hide diagnostics
   end,
 }
