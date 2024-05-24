@@ -771,7 +771,7 @@ require('lazy').setup({
     init = function()
       -- Default options:
       require('kanagawa').setup {
-        compile = false, -- enable compiling the colorscheme
+        compile = true, -- enable compiling the colorscheme
         undercurl = true, -- enable undercurls
         commentStyle = { italic = true },
         functionStyle = {},
@@ -788,7 +788,7 @@ require('lazy').setup({
         overrides = function(colors) -- add/modify highlights
           return {}
         end,
-        theme = 'dragon', -- Load "wave" theme when 'background' option is not set
+        theme = 'lotus', -- Load "wave" theme when 'background' option is not set
         background = { -- map the value of 'background' option to a theme
           dark = 'wave', -- try "dragon" !
           light = 'lotus',
@@ -797,6 +797,7 @@ require('lazy').setup({
 
       -- setup must be called before loading
       vim.cmd.colorscheme 'kanagawa'
+      vim.cmd.hi 'Comment gui=none'
     end,
   },
   -- Highlight todo, notes, etc in comments
@@ -892,6 +893,7 @@ require('lazy').setup({
   require 'kickstart.plugins.undotree',
   require 'kickstart.plugins.auto-session',
   require 'kickstart.plugins.trouble',
+  -- TODO: Add tpope/vim-fugitive here in the future
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
   --
