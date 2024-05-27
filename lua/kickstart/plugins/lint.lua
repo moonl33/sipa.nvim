@@ -54,6 +54,11 @@ return {
         end,
       })
        --]]
+
+      -- we create a custom lint command
+      vim.keymap.set('n', '<leader>l', function()
+        require('lint').try_lint()
+      end, { desc = 'Lint document' })
     end,
   },
 }

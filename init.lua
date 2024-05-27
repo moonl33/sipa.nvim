@@ -252,6 +252,7 @@ require('lazy').setup({
         ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
         ['<leader>t'] = { name = '[T]oggle', _ = 'which_key_ignore' },
         ['<leader>h'] = { name = 'Git [H]unk', _ = 'which_key_ignore' },
+        ['<leader>g'] = { name = '[G]it Fugitive', _ = 'which_key_ignore' },
       }
       -- visual mode
       require('which-key').register({
@@ -586,7 +587,7 @@ require('lazy').setup({
         -- Disable "format_on_save lsp_fallback" for languages that don't
         -- have a well standardized coding style. You can add additional
         -- languages here or re-enable it for the disabled ones.
-        local disable_filetypes = { c = true, cpp = true, php = true }
+        local disable_filetypes = { c = true, cpp = true, php = true, js = true, javascript = true, typescript = true }
         return {
           timeout_ms = 500,
           lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
@@ -893,6 +894,7 @@ require('lazy').setup({
   require 'kickstart.plugins.undotree',
   require 'kickstart.plugins.auto-session',
   require 'kickstart.plugins.trouble',
+  require 'kickstart.plugins.fugitive',
   -- TODO: Add tpope/vim-fugitive here in the future
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
