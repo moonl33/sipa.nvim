@@ -33,7 +33,7 @@ vim.opt.showmode = false
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
-vim.opt.clipboard = 'unnamedplus'
+-- vim.opt.clipboard = 'unnamedplus'
 
 -- Enable break indent
 vim.opt.breakindent = true
@@ -154,7 +154,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 -- Other keys
 -- Remap save shortcut to <leader>s
-vim.keymap.set('n', '<leader>w', ':w<CR>', { desc = 'Save ile' })
+vim.keymap.set('n', '<leader>W', ':w<CR>', { desc = 'Save File' })
 
 -- Remap quit shortcut to <leader>q
 vim.keymap.set('n', '<leader>q', ':q<CR>', { desc = 'Quit file' })
@@ -587,7 +587,7 @@ require('lazy').setup({
         -- Disable "format_on_save lsp_fallback" for languages that don't
         -- have a well standardized coding style. You can add additional
         -- languages here or re-enable it for the disabled ones.
-        local disable_filetypes = { c = true, cpp = true, php = true, js = true, javascript = true, typescript = true }
+        local disable_filetypes = { c = true, cpp = true, php = false, js = true, javascript = true, typescript = true }
         return {
           timeout_ms = 500,
           lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
@@ -772,7 +772,7 @@ require('lazy').setup({
     init = function()
       -- Default options:
       require('kanagawa').setup {
-        compile = true, -- enable compiling the colorscheme
+        compile = false, -- enable compiling the colorscheme
         undercurl = true, -- enable undercurls
         commentStyle = { italic = true },
         functionStyle = {},
@@ -789,15 +789,15 @@ require('lazy').setup({
         overrides = function(colors) -- add/modify highlights
           return {}
         end,
-        theme = 'lotus', -- Load "wave" theme when 'background' option is not set
+        theme = 'dragon', -- Load "wave" theme when 'background' option is not set
         background = { -- map the value of 'background' option to a theme
-          dark = 'wave', -- try "dragon" !
+          dark = 'dragon', -- try "dragon" !
           light = 'lotus',
         },
       }
 
       -- setup must be called before loading
-      vim.cmd.colorscheme 'kanagawa'
+      vim.cmd 'colorscheme kanagawa-dragon'
       vim.cmd.hi 'Comment gui=none'
     end,
   },
