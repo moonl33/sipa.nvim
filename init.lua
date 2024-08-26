@@ -79,7 +79,7 @@ vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 vim.opt.inccommand = 'split'
 
 -- Show which line your cursor is on
-vim.opt.cursorline = true
+vim.opt.cursorline = false
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
@@ -601,7 +601,7 @@ require('lazy').setup({
         --
         -- You can use a sub-list to tell conform to run *until* a formatter
         -- is found.
-        -- javascript = { { "prettierd", "prettier" } },
+        javascript = { { 'prettierd', 'prettier' } },
       },
     },
   },
@@ -716,7 +716,6 @@ require('lazy').setup({
       }
     end,
   },
-  --[[ 
   { -- You can easily change to a different colorscheme.
     -- Change the name of the colorscheme plugin below, and then
     -- change the command in the config to whatever the name of that colorscheme is.
@@ -729,7 +728,7 @@ require('lazy').setup({
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
       require('tokyonight').setup {
-        style = 'night',
+        style = 'storm',
         transparent = true,
         terminal_colors = true,
         styles = {
@@ -739,8 +738,9 @@ require('lazy').setup({
           variables = {},
           sidebars = 'dark',
           floats = 'dark',
-        }, -- italic = true,
-        -- italic_comments = true,
+        },
+        italic = true,
+        italic_comments = true,
         sidebars = { 'qf', 'vista_kind', 'terminal', 'packer' },
         day_brightness = 0.3, -- Adjusts the brightness of the colors of the **Day** style. Number between 0 and 1, from dull to vibrant colors
         hide_inactive_statusline = false, -- Enabling this option, will hide inactive statuslines and replace them with a thin border instead. Should work with the standard **StatusLine** and **LuaLine**.
@@ -759,13 +759,14 @@ require('lazy').setup({
         on_highlights = function(highlights, colors) end,
       }
 
-     -- vim.cmd.colorscheme 'tokyonight-moon'
+      vim.cmd.colorscheme 'tokyonight-storm'
 
       -- You can configure highlights by doing something like:
       vim.cmd.hi 'Comment gui=none'
     end,
-  }, ]]
-  {
+  },
+
+  --[[ {
     -- Kanagawa theme
     'rebelot/kanagawa.nvim',
     priority = 1000,
@@ -800,7 +801,7 @@ require('lazy').setup({
       vim.cmd 'colorscheme kanagawa-dragon'
       vim.cmd.hi 'Comment gui=none'
     end,
-  },
+  }, ]]
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
 
@@ -895,6 +896,7 @@ require('lazy').setup({
   require 'kickstart.plugins.auto-session',
   require 'kickstart.plugins.trouble',
   require 'kickstart.plugins.fugitive',
+  require 'kickstart.plugins.nvim-ufo',
   -- TODO: Add tpope/vim-fugitive here in the future
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
