@@ -897,6 +897,8 @@ require('lazy').setup({
   require 'kickstart.plugins.trouble',
   require 'kickstart.plugins.fugitive',
   require 'kickstart.plugins.nvim-ufo',
+  require 'kickstart.plugins.obsidian',
+  -- require 'kickstart.plugins.aerial',
   -- TODO: Add tpope/vim-fugitive here in the future
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
