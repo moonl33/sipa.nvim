@@ -10,6 +10,8 @@ vim.o.termguicolors = true
 -- set encoding to utf-8
 vim.o.encoding = 'utf-8'
 
+-- We have this from rmagatti/auto-session
+vim.o.sessionoptions = 'blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions'
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
 
