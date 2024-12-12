@@ -25,7 +25,7 @@ return {
       },
       {
         name = 'work',
-        path = '/mnt/d/Dev/Notes/WeBee/WeBee/',
+        path = '/mnt/d/Dev/Notes/Work',
       },
     },
     -- Optional, configure key mappings. These are the defaults. If you don't want to set any keymappings this

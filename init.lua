@@ -156,7 +156,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 -- Other keys
 -- Remap save shortcut to <leader>s
-vim.keymap.set('n', '<leader>W', ':w<CR>', { desc = 'Save File' })
+vim.keymap.set('n', '<C-s>', ':w<CR>', { desc = 'Save File' })
 
 -- Remap quit shortcut to <leader>q
 vim.keymap.set('n', '<leader>q', ':q<CR>', { desc = 'Quit file' })
@@ -953,6 +953,7 @@ require('lazy').setup({
   require 'kickstart.plugins.fugitive',
   require 'kickstart.plugins.nvim-ufo',
   require 'kickstart.plugins.obsidian',
+  require 'kickstart.plugins.pomodoro',
   -- require 'kickstart.plugins.aerial',
   -- TODO: Add tpope/vim-fugitive here in the future
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
